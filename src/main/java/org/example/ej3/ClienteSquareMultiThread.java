@@ -10,6 +10,7 @@ public class ClienteSquareMultiThread {
     private static final String SERVER_IP = "127.0.0.1";
     private static final int SERVER_PORT = 57327;
 
+    //MULTITHREAD UTILS:
     private  static  final double min = 4;
     private  static  final double max = 100;
     private static final int CONSULTAS = 2;
