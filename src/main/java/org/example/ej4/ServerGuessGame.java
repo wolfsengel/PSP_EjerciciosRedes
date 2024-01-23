@@ -13,10 +13,10 @@ public class ServerGuessGame {
             System.out.println("Server is listening for incoming connections...");
 
             while (true) {
+                //new thread for a client
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Accepted connection from " + clientSocket.getInetAddress());
-
-                handleClient(clientSocket);
+                System.out.println("New client connected");
+                new Thread(() -> handleClient(clientSocket)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,20 +40,18 @@ public class ServerGuessGame {
                 int respuesta = 80;
                 switch (orden) {
                     case "HELP":
-                        respuesta = 6699;
+                        respuesta = 40;
                         break;
                     case "QUIT":
                         respuesta = 11;
                         clientSocket.close();
-                        break;
-                    case "ERROR":
                         break;
                     case "NUM":
                         if (intentos == 0) {
                             respuesta = 40;
                         } else if (numero == solucion)  {
                             respuesta = 50;
-                        } else if (numero > 50) {
+                        } else if (numero > solucion) {
                             respuesta = 25;
                         } else {
                             respuesta = 35;
@@ -63,6 +61,7 @@ public class ServerGuessGame {
                     case "NEW":
                         solucion = new Random().nextInt(100);
                         intentos = numero;
+                        respuesta = 10;
                         break;
                     default:
                         break;

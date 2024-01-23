@@ -3,7 +3,7 @@ package org.example.ej4;
 import java.io.*;
 import java.net.Socket;
 
-public class ClienteGuessGame {
+public class ClienteGuessGame {//IVAN ES MI PAPI
     private static final String SERVER_IP = "127.0.0.1";
     private static final int SERVER_PORT = 57327;
 
