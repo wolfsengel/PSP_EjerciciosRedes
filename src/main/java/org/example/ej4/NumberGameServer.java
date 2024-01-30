@@ -45,7 +45,7 @@ public class NumberGameServer {
 
                 switch (command) {
                     case "NEW":
-                        remainingTries = Integer.parseInt(parts[1]);
+                        remainingTries = Integer.parseInt(parts[1]); //TODO: handle exception
                         secretNumber = generateRandomNumber();
                         writer.writeUTF("20 PLAY " + remainingTries);
                         break;
@@ -54,7 +54,7 @@ public class NumberGameServer {
                             writer.writeUTF("80 ERR");
                             break;
                         }
-                        int clientGuess = Integer.parseInt(parts[1]);
+                        int clientGuess = Integer.parseInt(parts[1]); //TODO: handle exception
                         remainingTries--;
                         if (clientGuess == secretNumber) {
                             writer.writeUTF("50 WIN");
