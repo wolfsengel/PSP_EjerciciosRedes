@@ -19,6 +19,7 @@ public class RandomWordServer {
                 RandomWordServerWorker worker = new RandomWordServerWorker(clientSocket);
                 worker.start();
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

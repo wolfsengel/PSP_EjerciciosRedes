@@ -1,0 +1,1 @@
+We want to create a client-server application to store the telephone number of our contacts
