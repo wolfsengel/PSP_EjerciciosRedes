@@ -1,5 +1,13 @@
 package org.example.ej6.Server;
 
-public class ContactServerWorker {
-    //TODO: implement this
+import java.net.Socket;
+
+public class ContactServerWorker extends Thread {
+    private Socket clientSocket;
+    public ContactServerWorker(Socket clientSocket) {
+        this.clientSocket = clientSocket;
+    }
+    public void run() {
+
+    }
 }
