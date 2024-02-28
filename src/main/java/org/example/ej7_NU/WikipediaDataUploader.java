@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class WikipediaDataUploader {
 
+    public static String fileDirectory = "C:\\Users\\a22angelgp\\IdeaProjects\\cliente_servidor\\src\\main\\java\\org\\example\\ej7_NU\\jsons";
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -26,7 +27,7 @@ public class WikipediaDataUploader {
 
         if (data != null) {
             // Save to JSON file
-            String filePath = saveToJson(data, countryCode, date);
+            // String filePath = saveToJson(data, countryCode, date);
 
             // FTP Configuration
             String ftpHost = "192.156.68.1";
@@ -34,7 +35,10 @@ public class WikipediaDataUploader {
             String ftpPassword = "angel";
 
             // Upload to FTP server
-            uploadToFtp(filePath, ftpHost, ftpUser, ftpPassword);
+            // uploadToFtp(filePath, ftpHost, ftpUser, ftpPassword);
+
+            // PRINT PRETTY JSON
+            System.out.println(data);
         }
     }
 
@@ -73,17 +77,32 @@ public class WikipediaDataUploader {
     }
 
     private static String saveToJson(String data, String countryCode, String date) {
-        String filePath = countryCode + "_" + date + ".json";
+        try {
+            // Create a directory for the JSON files
+            File directory = new File(fileDirectory);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
 
-        try (PrintWriter writer = new PrintWriter(filePath)) {
+            // Create a file for the JSON data
+            String fileName = countryCode + "_" + date + ".json";
+            String filePath = fileDirectory + "\\" + fileName;
+            File file = new File(filePath);
+
+            // Write the data to the file
+            FileWriter writer = new FileWriter(file);
             writer.write(data);
+            writer.close();
+
             System.out.println("Data saved to " + filePath);
-        } catch (FileNotFoundException e) {
+            return filePath;
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return filePath;
+        return null;
     }
+
 
     private static void uploadToFtp(String filePath, String ftpHost, String ftpUser, String ftpPassword) {
         FTPClient ftpClient = new FTPClient();
